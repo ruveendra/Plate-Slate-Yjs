@@ -7,9 +7,9 @@ const initialValue = [{ type: 'paragraph', children: [{ text: '' }] }];
 
 // Setup the server
 const server = Server.configure({
-  URL: "ws://192.168.1.3:8080",
+  // URL: "ws://192.168.1.3:8080",
 
-  //port: 8080,
+  port: 8080,
   
 
   // Add logging

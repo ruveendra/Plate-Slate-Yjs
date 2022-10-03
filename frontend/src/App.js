@@ -12,10 +12,7 @@ import { Editable, Slate, withReact } from "slate-react";
 import * as Y from "yjs";
 import { Plate, PlateProvider, TEditableProps, usePlateSelectors, usePlateStates,createTEditor,createPlateEditor } from '@udecode/plate';
 
-import { WebsocketProvider } from 'y-websocket'
 
-// const doc = new Y.Doc()
-// const wsProvider = new WebsocketProvider('ws://localhost:1234', 'my-roomname', doc)
 
 
 const editableProps = {
@@ -24,32 +21,32 @@ const editableProps = {
 
 function App() {
   //for Plate
-  // const [value, setValue] = usePlateStates().value();
+  const [value, setValue] = usePlateStates().value();
   
   //for Slate
-  const [value, setValue] = useState([])
-
-  const provider = useMemo(
-    () =>
-      new WebsocketProvider({
-        url: 'ws://localhost:1234',
-        //url: "ws://127.0.0.1:8080",
-        name: "slate-yjs-demo",
-        connect: false,
-      }),
-    []
-  );
+  // const [value, setValue] = useState([])
 
   // const provider = useMemo(
   //   () =>
-  //     new HocuspocusProvider({
-  //       url: "ws://192.168.1.3:8080",
+  //     new WebsocketProvider({
+  //       url: 'ws://localhost:1234',
   //       //url: "ws://127.0.0.1:8080",
   //       name: "slate-yjs-demo",
   //       connect: false,
   //     }),
   //   []
   // );
+
+  const provider = useMemo(
+    () =>
+      new HocuspocusProvider({
+        // url: 'ws://localhost:1234',
+        url: "ws://127.0.0.1:8080",
+        name: "slate-yjs-demo",
+        connect: false,
+      }),
+    []
+  );
 
   const editor = useMemo(() => {
     const sharedType = provider.document.get("content", Y.XmlText);
