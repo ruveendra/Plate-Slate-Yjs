@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { HocuspocusProvider } from "@hocuspocus/provider";
+//import { Button, H4, Instance, Title } from "./Components.tsx";
 import {
   withYHistory,
   withYjs,
@@ -15,6 +16,7 @@ import { Plate, PlateProvider, TEditableProps, usePlateSelectors, usePlateStates
 
 
 
+
 const editableProps = {
   placeholder: 'Type...',
 };
@@ -22,6 +24,7 @@ const editableProps = {
 function App() {
   //for Plate
   const [value, setValue] = usePlateStates().value();
+  const [isOnline, setOnlineState] = useState(false);
   
   //for Slate
   // const [value, setValue] = useState([])
@@ -36,7 +39,6 @@ function App() {
   //     }),
   //   []
   // );
-  
 
   const provider = useMemo(
     () =>
@@ -65,6 +67,20 @@ function App() {
     return () => YjsEditor.disconnect(editor);
   }, [editor]);
 
+  // const toggleOnline = () => {
+  //   isOnline ? provider.disconnect() : provider.connect();
+  // };
+
+  const toggleOnline = () => {
+    provider.connect();
+    
+  };
+
+  const toggleOffline = () => {
+    provider.disconnect() 
+  };
+
+
 
 
 
@@ -75,10 +91,28 @@ function App() {
     // </Slate>
 
     //withPlate
-
-    <Plate editableProps={editableProps} onChange={setValue} value={value} editor={editor} >
+    <div>
+      <Plate editableProps={editableProps} onChange={setValue} value={value} editor={editor} >
       value: {JSON.stringify(value)}
     </Plate>
+
+    <div >
+          <button type="button" onClick={toggleOnline}>
+            Go Online
+          </button>//
+          
+        </div>
+
+        <div >
+          <button type="button" onClick={toggleOffline}>
+            Go Offline
+          </button>//
+          
+        </div>
+    
+    </div>
+
+    
     
 
   );
